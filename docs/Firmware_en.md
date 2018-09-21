@@ -23,16 +23,14 @@
 
 ## Flashing via USB (Linux)
 
-- download and unpack the latest version of [esptool](https://github.com/igrr/esptool-ck/releases). Then change directory into the newly unpacked directory, using terminal commands such as:
+- Install the esptool using pip
 ```
-    wget https://github.com/igrr/esptool-ck/releases/download/0.4.12/esptool-0.4.12-linux64.tar.gz
-    tar xf esptool-0.4.12-linux64.tar.gz
-    cd esptool-0.4.12-linux64
+    pip install esptool
 ```
     
 - download the latest firmware from the [iSpindel Releases page](https://github.com/universam1/iSpindel/releases) e.g.
 ```
-    wget https://github.com/universam1/iSpindel/releases/download/5.6.1/firmware.bin
+    wget https://github.com/universam1/iSpindel/releases/download/6.0.1/firmware.bin
 ```
 
 - determine the iSpindel's device path. This may be found by listing all serial USB devices before and after plugging in the iSpindel e.g. before iSpinndel is plugged in:
@@ -51,5 +49,5 @@ showing that the iSpindel device name is /dev/ttyUSB0
 
 - upload the firmware by running the esptool command with the discovered iSpindel device name (/dev/ttyUSB0 in this case):
 
-```./esptool -vv -cd nodemcu -cb 921600 -cp /dev/ttyUSB0 -ca 0x00000 -cf ./firmware.bin```
+```esptool.py -p /dev/ttyUSB0 write_flash 0x00000 firmware.bin```
 
